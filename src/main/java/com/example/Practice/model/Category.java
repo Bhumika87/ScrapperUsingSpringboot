@@ -4,17 +4,27 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import java.util.Date;
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection="cat")
+@Entity
+@Table(name = "categories")
+
 public class Category {
-    String title;
-    Date created_at;
-    Date updated_at;
-    int clues_count;
+    @Id
+    private int id;
+
+    private String title;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created_at;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updated_at;
+
+    private int clues_count;
 }

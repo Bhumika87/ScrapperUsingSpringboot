@@ -1,11 +1,22 @@
 package com.example.Practice.repository;
 
-import com.example.Practice.model.Use;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.example.Practice.model.FetchingData;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
 @Repository
-public interface UseRepo extends MongoRepository<Use,String> {
+public interface UseRepo extends JpaRepository<FetchingData,String> {
+  //    public List<Book> findByPublication(String publication);
+  @Query("SELECT q.category_id  FROM FetchingData q WHERE q.question = :question")
+  public int findCatId(String question);
+  @Query("SELECT q.answer  FROM FetchingData q WHERE q.category_id = :category_id")
+  public String findAns(int category_id);
+
+//find Random Question from dataBase
+  @Query("SELECT q.question  FROM FetchingData q WHERE q.category_id = :category_id")
+  public String findRandomQues(int category_id);
+
 }
