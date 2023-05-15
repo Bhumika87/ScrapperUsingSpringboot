@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
 public class HomeController {
     private final ServiceLayer serviceLayer;
-@Autowired
+     @Autowired
     public HomeController(ServiceLayer serviceLayer)
     {
         this.serviceLayer = serviceLayer;
@@ -31,22 +30,23 @@ public class HomeController {
         return ResponseEntity.ok(serviceLayer.consumeQuestion());
     }
     @PostMapping("/next")
-    public ResponseEntity<ResponseNext> checkans(@RequestBody QueAndAnswer queAndAnswer) {
+    public ResponseEntity<ResponseNext> checkAnsNextQue(@RequestBody QueAndAnswer queAndAnswer) {
         String queFromJson = queAndAnswer.getQuestion();
         String ansFromJson = queAndAnswer.getAnswer();
         int catId = serviceLayer.consumecatId(queFromJson);
         String ans = serviceLayer.consumeAns(catId);
         ResponseNext responseNext = new ResponseNext();
        if(ans.equals(ansFromJson)){
-
+                 //if answer is matched
            responseNext.setCorrectAns("Correct");
 
         }else
         {
+               //if ans is not matched
             responseNext.setCorrectAns("InCorrect Ans");
         }
-
-        responseNext.setNextQuestion(serviceLayer.getRandomQuestion());
+            //get question
+        responseNext.setNextQuestion(serviceLayer.consumeQuestion());
 
         return ResponseEntity.ok(responseNext);
 

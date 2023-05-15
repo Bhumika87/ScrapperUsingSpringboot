@@ -1,5 +1,5 @@
 package com.example.Practice.pojo;
-
+//Return the response of post mapping
 public class ResponseNext {
     String CorrectAns;
     String NextQuestion;

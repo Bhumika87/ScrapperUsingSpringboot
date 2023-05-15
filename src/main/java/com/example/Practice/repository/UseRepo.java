@@ -15,8 +15,6 @@ public interface UseRepo extends JpaRepository<FetchingData,String> {
   @Query("SELECT q.answer  FROM FetchingData q WHERE q.category_id = :category_id")
   public String findAns(int category_id);
 
-//find Random Question from dataBase
-  @Query("SELECT q.question  FROM FetchingData q WHERE q.category_id = :category_id")
-  public String findRandomQues(int category_id);
+
 
 }

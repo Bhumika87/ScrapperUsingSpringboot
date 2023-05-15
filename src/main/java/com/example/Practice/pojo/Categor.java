@@ -4,7 +4,7 @@ import lombok.*;
 
 import java.util.Date;
 @Data
-public class Cate {
+public class Categor {
     private int id;
     private String title;
     private Date created_at;
